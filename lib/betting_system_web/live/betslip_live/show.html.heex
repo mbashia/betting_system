@@ -1,0 +1,37 @@
+<h1>Show Betslip</h1>
+
+<%= if @live_action in [:edit] do %>
+  <.modal return_to={Routes.betslip_show_path(@socket, :show, @betslip)}>
+    <.live_component
+      module={BettingSystemWeb.BetslipLive.FormComponent}
+      id={@betslip.id}
+      title={@page_title}
+      action={@live_action}
+      betslip={@betslip}
+      return_to={Routes.betslip_show_path(@socket, :show, @betslip)}
+    />
+  </.modal>
+<% end %>
+
+<ul>
+  <li>
+    <strong>Status:</strong>
+    <%= @betslip.status %>
+  </li>
+
+  <li>
+    <strong>Odds:</strong>
+    <%= @betslip.odds %>
+  </li>
+
+  <li>
+    <strong>Result type:</strong>
+    <%= @betslip.result_type %>
+  </li>
+</ul>
+
+<span>
+  <%= live_patch("Edit", to: Routes.betslip_show_path(@socket, :edit, @betslip), class: "button") %>
+</span>
+|
+<span><%= live_redirect("Back", to: Routes.betslip_index_path(@socket, :index)) %></span>

@@ -1,0 +1,55 @@
+<h1>Listing Bets</h1>
+
+<%= if @live_action in [:new, :edit] do %>
+  <.modal return_to={Routes.bets_index_path(@socket, :index)}>
+    <.live_component
+      module={BettingSystemWeb.BetsLive.FormComponent}
+      id={@bets.id || :new}
+      title={@page_title}
+      action={@live_action}
+      bets={@bets}
+      user={@user}
+      return_to={Routes.bets_index_path(@socket, :index)}
+    />
+  </.modal>
+<% end %>
+
+<table>
+  <thead>
+    <tr>
+      <th>Amount</th>
+      <th>Odds</th>
+      <th>Status</th>
+      <th>Payout</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody id="bets">
+    <%= for bets <- @bets_collection do %>
+      <tr id={"bets-#{bets.id}"}>
+        <td><%= bets.amount %></td>
+        <td><%= bets.odds %></td>
+        <td><%= bets.status %></td>
+        <td><%= bets.payout %></td>
+
+        <td>
+          <span>
+            <%= live_redirect("Show", to: Routes.bets_show_path(@socket, :show, bets)) %>
+          </span>
+          <span><%= live_patch("Edit", to: Routes.bets_index_path(@socket, :edit, bets)) %></span>
+          <span>
+            <%= link("Delete",
+              to: "#",
+              phx_click: "delete",
+              phx_value_id: bets.id,
+              data: [confirm: "Are you sure?"]
+            ) %>
+          </span>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<span><%= live_patch("New Bets", to: Routes.bets_index_path(@socket, :new)) %></span>

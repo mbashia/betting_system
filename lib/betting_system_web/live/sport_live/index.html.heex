@@ -1,0 +1,110 @@
+<%= if @live_action in [:new, :edit] do %>
+  <.modal return_to={Routes.sport_index_path(@socket, :index)}>
+    <.live_component
+      module={BettingSystemWeb.SportLive.FormComponent}
+      id={@sport.id || :new}
+      title={@page_title}
+      action={@live_action}
+      sport={@sport}
+      user={@user}
+      return_to={Routes.sport_index_path(@socket, :index)}
+    />
+  </.modal>
+<% end %>
+
+<div class="flex flex-col   w-[98%] gap-2">
+  <div class="flex flex-col gap-1">
+    <div class="flex flex-row items-end p-2 justify-between w-[100%]">
+      <div></div>
+      <%= live_patch(to: Routes.sport_index_path(@socket, :new)) do %>
+        <button class="bg-green-500 flex gap-2 items-center text-white  rounded-md p-2">
+          <%= Heroicons.icon("plus",
+            type: "solid",
+            class: "h-8   font-bold w-8"
+          ) %> New Sport
+        </button>
+      <% end %>
+    </div>
+  </div>
+  <div class="bg-[#202941] text-white h-[50vh]  rounded-xl p-4 ">
+    <table class="w-[100%]">
+      <thead class="border-b-2 poppins-regular border-black">
+        <tr>
+          <th class="p-2 font-semibold ">image</th>
+
+          <th class="p-2 font-semibold ">Name</th>
+          <th class="p-2 font-semibold ">Description</th>
+
+          <th class="p-2 font-semibold ">Status</th>
+
+          <th class="p-2 font-semibold ">Actions</th>
+        </tr>
+      </thead>
+      <tbody id="events" class="poppins-light">
+        <%= for sport <- @sports do %>
+          <tr
+            class="border-b-[1px] cursor-pointer text-center hover:bg-blue-100/50 transition-all ease-in-out duration-500  border-black"
+            id={"sport-#{sport.id}"}
+          >
+            <td class="p-2">
+              <div class="flex fex-col justify-center items-center">
+                <img src="/images/champe_no_bc.png" class="w-[50px] h-[50px] object-cover " />
+              </div>
+            </td>
+            <td><%= sport.name %></td>
+
+            <td><%= sport.description %></td>
+
+            <td>
+              <%= if sport.active == "Active" do %>
+                <span class="bg-green-500 text-white rounded-md p-1">
+                  <%= sport.active %>
+                </span>
+              <% else %>
+                <span class="bg-red-500 text-white rounded-md p-1">
+                  <%= sport.active %>
+                </span>
+              <% end %>
+            </td>
+
+            <td>
+              <div class="flex flex-row gap-2 justify-center items-center">
+                <div>
+                  <%= live_redirect(to: Routes.sport_show_path(@socket, :show, sport)) do %>
+                    <%= Heroicons.icon("eye",
+                      type: "solid",
+                      class: "h-6  group-hover:text-green-600 text-green-400 w-6"
+                    ) %>
+                  <% end %>
+                </div>
+
+                <div>
+                  <%= live_patch(to: Routes.sport_index_path(@socket, :edit, sport)) do %>
+                    <%= Heroicons.icon("pencil",
+                      type: "solid",
+                      class: "h-6  group-hover:text-blue-600 text-blue-400 w-6"
+                    ) %>
+                  <% end %>
+                </div>
+
+                <div>
+                  <%= link(
+                    to: "#",
+                    phx_click: "delete",
+                    phx_value_id: sport.id,
+                    data: [confirm: "Are you sure?"]
+                  )  do %>
+                    <%= Heroicons.icon("trash",
+                      type: "solid",
+                      class: "h-6  group-hover:text-red-600 text-red-400 w-6"
+                    ) %>
+                  <% end %>
+                </div>
+              </div>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

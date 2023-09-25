@@ -1,0 +1,32 @@
+<h1>Show Sport</h1>
+
+<%= if @live_action in [:edit] do %>
+  <.modal return_to={Routes.sport_show_path(@socket, :show, @sport)}>
+    <.live_component
+      module={BettingSystemWeb.SportLive.FormComponent}
+      id={@sport.id}
+      title={@page_title}
+      action={@live_action}
+      sport={@sport}
+      return_to={Routes.sport_show_path(@socket, :show, @sport)}
+    />
+  </.modal>
+<% end %>
+
+<ul>
+  <li>
+    <strong>Name:</strong>
+    <%= @sport.name %>
+  </li>
+
+  <li>
+    <strong>Description:</strong>
+    <%= @sport.description %>
+  </li>
+</ul>
+
+<span>
+  <%= live_patch("Edit", to: Routes.sport_show_path(@socket, :edit, @sport), class: "button") %>
+</span>
+|
+<span><%= live_redirect("Back", to: Routes.sport_index_path(@socket, :index)) %></span>

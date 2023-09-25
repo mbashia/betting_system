@@ -1,0 +1,13 @@
+<div
+  id="mainDiv"
+  class="h-[100vh] w-[100vw] bg-[#071C27] relative border flex flex-col justify-center items-center  border-transparent text-white"
+  style="z-index:2;"
+>
+  <p class="glow">WELCOME TO SPORTODDS</p>
+  <p class="poppins-regular text-3xl mb-6 hover:underline transition duration-3000 ease-in-out"><%= link("Log in to you account",
+        to: Routes.user_session_path(@conn, :new),
+        class: " "
+      ) %></p>
+
+   
+</div>

@@ -1,0 +1,216 @@
+<%= if @live_action in [:new, :edit] do %>
+  <.modal return_to={Routes.game_index_path(@socket, :index)}>
+    <.live_component
+      module={BettingSystemWeb.GameLive.FormComponent}
+      id={@game.id || :new}
+      title={@page_title}
+      action={@live_action}
+      game={@game}
+      user={@user}
+      sports={@sports}
+      return_to={Routes.game_index_path(@socket, :index)}
+    />
+  </.modal>
+<% end %>
+
+<div class="main-div h-[100vh] flex relative flex-row gap-2 pt-4 
+">
+  <div class="w-[70%] bg-[#141C33] rounded p-2   h-[80%] overflow-y-auto ">
+    <div
+      style="border-color:rgba(123,131,156,.6);"
+      class="flex justify-evenly poppins-regular pb-2 border-b-[1px] text-[#8A92AB]"
+    >
+      <span>Highlights</span><span>Upcoming</span><span>Countries</span><span>Quick e</span>
+    </div>
+
+    <%= if @user.role == "admin" do %>
+      <div class="mt-2">
+        <%= live_patch(to: Routes.game_index_path(@socket, :new)) do %>
+          <button class="bg-green-500 flex gap-2 items-center text-white  rounded-md p-2">
+            <%= Heroicons.icon("plus",
+              type: "solid",
+              class: "h-8   font-bold w-8"
+            ) %> New Game
+          </button>
+        <% end %>
+      </div>
+    <% end %>
+    <div class="mt-2 h-[150px]">
+      <img
+        src="/images/celebration.jpg"
+        alt="scadvert logo"
+        class="object-cover	 h-[100%] w-[100%]  "
+      />
+    </div>
+    <div class="flex justify-between poppins-regular text-white">
+      <%= if @user.role == "admin" do %>
+        <span class="w-[30%]">Teams</span>
+      <% else %>
+        <span class="w-[50%]">Teams</span>
+      <% end %>
+      <div class="w-[50%] flex justify-between">
+        <div>1</div>
+        <div>X</div>
+        <div>2</div>
+      </div>
+      <%= if @user.role == "admin" do %>
+        <div class="w-[20%] ml-[20%]">actions</div>
+      <% end %>
+    </div>
+    <%= for  game <- @games do %>
+      <div class="flex justify-between poppins-regular text-white mt-2">
+        <%= if @user.role == "admin" do %>
+          <span class="w-[30%] "><%= game.team1 %> vs <%= game.team2 %></span>
+        <% else %>
+          <span class="w-[50%] "><%= game.team1 %> vs <%= game.team2 %></span>
+        <% end %>
+
+        <div class="w-[50%] flex justify-between">
+          <button
+            class="bg-[#283352] w-[55px] rounded h-[40px]"
+            phx-click="add bet"
+            phx-value-id={game.id}
+            phx-value-type="team1 win"
+            phx-value-odds={game.win}
+          >
+            <%= game.win %>
+          </button>
+          <button
+            class="bg-[#283352] w-[55px] rounded h-[40px]"
+            phx-click="add bet"
+            phx-value-id={game.id}
+            phx-value-type="game_draw"
+            phx-value-odds={game.draw}
+          >
+            <%= game.draw %>
+          </button>
+          <button
+            class="bg-[#283352] w-[55px] rounded h-[40px]"
+            phx-click="add bet"
+            phx-value-id={game.id}
+            phx-value-type="team2 win"
+            phx-value-odds={game.lose}
+          >
+            <%= game.lose %>
+          </button>
+        </div>
+        <%= if @user.role == "admin" do %>
+          <div class="w-[20%] ml-4">
+            <div class="flex flex-row gap-2 justify-around">
+              <div>
+                <%= live_redirect(to: Routes.game_show_path(@socket, :show, game)) do %>
+                  <%= Heroicons.icon("eye",
+                    type: "solid",
+                    class: "h-6  group-hover:text-green-600 text-green-400 w-6"
+                  ) %>
+                <% end %>
+              </div>
+
+              <div>
+                <%= live_patch(to: Routes.game_index_path(@socket, :edit, game)) do %>
+                  <%= Heroicons.icon("pencil",
+                    type: "solid",
+                    class: "h-6  group-hover:text-blue-600 text-blue-400 w-6"
+                  ) %>
+                <% end %>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+  <div class=" betslip-div  bg-blue-[#141C33] w-[30%] h-[100vh] text-white">
+    <div class="h-[45%] overflow-y-auto">
+      <div class="w-[full] bg-[#202A39] p-2">
+        <p class="poppins-regular text-white">Betslip</p>
+      </div>
+      <div
+        class="flex w-[full] justify-around  border-b-[1px] pb-2 text-[#8A92AB]"
+        style=" border-color:rgba(123,131,156,.6); "
+      >
+        <div>Single</div>
+        <div>Multiple</div>
+
+        <div>System</div>
+      </div>
+
+      <%= if @bets == [] do %>
+        <div class="poppins-bold text-xl ml-4">
+          LOAD BETSLIP TO START WINNING NOW!!!
+          <div><img src="/images/betting.gif" alt="scadvert logo" class="  " /></div>
+        </div>
+      <% else %>
+        <div class=" ">
+          <%= for bet <- @bets do %>
+            <div
+              class="border-b-[1px] poppins-regular text-[#8A92AB] p-6"
+              style=" border-color:rgba(123,131,156,.6); "
+            >
+              <div class="flex justify-between">
+                <span class="text-sm"><%= bet.game.team1 %> vs <%= bet.game.team2 %></span>
+                <button phx-click="cancel" phx-value-cancel={bet.id}>X</button>
+              </div>
+              <div class="flex gap-2">
+                <div class="h-[10px] w-[10px] mr-4 ">x<%= bet.odds %></div>
+                <%= if bet.result_type == "team1 win" do %>
+                  <div class=" text-base"><%= bet.game.team1 %></div>
+                <% else %>
+                  <%= if bet.result_type == "game_draw" do %>
+                    <div class=" text-base">game draw</div>
+                  <% else %>
+                    <div class=" text-base"><%= bet.game.team2 %></div>
+                  <% end %>
+                <% end %>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+    <%= if @bets != [] do %>
+      <div class="bet-details-div h-[40%] text-[#8A92AB]">
+        <div class="flex justify-between p-2">
+          <p>balance</p>
+          <p>1000000</p>
+        </div>
+        <div class="flex justify-between p-2">
+          <p>total odds</p>
+          <p><%= @total_odds %></p>
+        </div>
+
+        <div class="flex justify-between p-2">
+          <p>payout</p>
+          <p><%= @payout %></p>
+        </div>
+        <.form
+          let={f}
+          for={@changeset}
+          id="bets-form"
+          phx-submit="place_bet"
+          phx-change="validate_amount"
+        >
+          <%= label(f, :amount) %>
+          <%= number_input(f, :amount,
+            step: "any",
+            placeholder: "Amount(KES)",
+            class: "w-[full] text-black"
+          ) %>
+          <%= error_tag(f, :amount) %>
+
+          <%= number_input(f, :odds, step: "any", type: "hidden", value: @total_odds) %>
+          <%= error_tag(f, :odds) %>
+
+          <div class="ml-6 bg-[#FA6838] w-[100px] rounded  p-2 mt-4">
+            <%= submit("place bet",
+              phx_disable_with: "Saving...",
+              class: "text-white poppins-regular",
+              disabled: @disabled
+            ) %>
+          </div>
+        </.form>
+      </div>
+    <% else %>
+    <% end %>
+  </div>
+</div>

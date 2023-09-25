@@ -1,0 +1,241 @@
+<div
+  id="mainDiv"
+  class="h-[100vh] w-[100vw] bg-[#071C27] relative border   border-transparent text-white"
+  style="z-index:2;"
+>
+  <div
+    style="display:none; background-color:rgba(0,0,0, 0.5); z-index:3;"
+    id="overlay"
+    class=" absolute top-0 right-0  h-[100%] w-[100%] "
+  >
+  </div>
+
+  <div class="m-10 mb-14 w-[95%] flex justify-between p-6  ">
+    <span class="poppins-bold text-white text-3xl">SportOdds</span>
+    <div class="flex gap-2 ">
+      <button onclick="toggleLeave()" class="  align-top">
+        <%= Heroicons.icon("x-mark", type: "outline", class: "h-6 w-6 text-white inline-block ") %>
+        <span class=" mt-2">Close</span>
+      </button>
+    </div>
+  </div>
+  <div class="ml-[150px] poppins-bold text-lg text-white">
+    <p class="whitespace-normal break-words">Complete the following information
+      .</p>
+
+    <p>to benefit from all the advantages.</p>
+    <p>of SportOdds products.</p>
+    <ul class="mt-4 ">
+      <li>
+        <div class="h-[9px] w-[9px] rounded-full border border-white inline-block mr-2"></div>
+        <span>full names</span>
+      </li>
+      <li>
+        <div class="h-[9px] w-[9px] rounded-full border border-white inline-block mr-2"></div>
+        <span>phone number</span>
+      </li>
+      <li>
+        <div class="h-[9px] w-[9px] rounded-full border border-white inline-block mr-2"></div>
+        <span>Email</span>
+      </li>
+      <li>
+        <div class="h-[9px] w-[9px] rounded-full border border-white inline-block mr-2"></div>
+        <span>password</span>
+      </li>
+    </ul>
+  </div>
+  <div
+    style="display:none;"
+    id="registrationForm"
+    class=" bg-[#E5F2FC] flex flex-col    absolute right-[250px]  rounded-2xl top-[130px] h-[73%] w-[35%] p-4"
+  >
+    <.form let={f} for={@changeset} action={Routes.user_registration_path(@conn, :create)}>
+      <%= if @changeset.action do %>
+        <div class="alert alert-danger">
+          <p>Oops, something went wrong! Please check the errors below.</p>
+        </div>
+      <% end %>
+      <span class="poppins-bold text-[#0E1C27] text-2xl ml-10 ">Register</span>
+      <div class="m-4 text-[#828F96]">
+        <%= text_input(f, :firstname,
+          required: true,
+          placeholder: " firstname",
+          class: "w-[100%] rounded-xl mt-4 text-black"
+        ) %>
+        <%= error_tag(f, :firstname) %>
+      </div>
+      <div class="m-4 text-[#828F96]">
+        <%= text_input(f, :lastname,
+          required: true,
+          placeholder: " lastname",
+          class: "w-[100%] rounded-xl mt-4 text-black"
+        ) %>
+        <%= error_tag(f, :lastname) %>
+      </div>
+      <div class="m-4 text-[#828F96]">
+        <%= number_input(f, :phone_number,
+          required: true,
+          placeholder: " enter phone number",
+          class: "w-[100%] rounded-xl mt-4 text-black"
+        ) %>
+        <%= error_tag(f, :phone_number) %>
+      </div>
+      <div class="m-4 text-[#828F96]">
+        <%= email_input(f, :email,
+          required: true,
+          placeholder: " enter  email",
+          class: "w-[100%] rounded-xl mt-4 text-black"
+        ) %>
+
+        <%= error_tag(f, :email) %>
+      </div>
+      <div class="m-4 text-[#828F96]">
+        <%= password_input(f, :password,
+          required: true,
+          placeholder: " enter password",
+          class: "w-[100%] rounded-xl mt-4 text-black"
+        ) %>
+        <%= error_tag(f, :password) %>
+      </div>
+
+      <div class=" inline-block p-1 ml-[150px] px-6 bg-[#00A8FA]  rounded ">
+        <%= submit("Register") %>
+      </div>
+    </.form>
+    <span class="mx-auto mt-2">
+      <%= link("Log in",
+        to: Routes.user_session_path(@conn, :new),
+        class: " ml-[20%] text-[#00A8FA]"
+      ) %> | <%= link(
+        "Forgot your password?",
+        to: Routes.user_reset_password_path(@conn, :new),
+        class: "text-black"
+      ) %>
+    </span>
+  </div>
+
+  <div
+    id="startDiv"
+    class="bg-[#E5F2FC] absolute right-[250px]  rounded-2xl top-[130px] h-[65%] w-[35%] p-4"
+  >
+    <div class="text-black ml-8 m-4 p-4">
+      <span class=" poppins-bold text-lg text-[#828F96] m-4 ">Welcome to SportOdds</span>
+      <p class="text-xl  poppins-bold text-[#071C27] mt-2">Join the player community</p>
+
+      <div class="flex flex-col ">
+        <div class="flex gap-2">
+          <div><%= FontAwesome.icon("clock", type: "regular", class: "h-6 w-6") %></div>
+          <div>
+            <span class="text-[#828F96] poppins-regular tracking-wide leading-10">
+              Open an account in less than 2 minutes
+            </span>
+          </div>
+        </div>
+        <div class="flex gap-2">
+          <div><%= FontAwesome.icon("trophy", type: "solid", class: "h-6 w-6") %></div>
+          <div>
+            <span class="text-[#828F96] poppins-regular tracking-wide leading-10">
+              The best odds in the market
+            </span>
+          </div>
+        </div>
+        <div class="flex gap-2">
+          <div><%= FontAwesome.icon("tv", type: "solid", class: "h-6 w-6") %></div>
+          <div>
+            <span class="text-[#828F96] poppins-regular tracking-wide leading-10">
+              Live statistics and information
+            </span>
+          </div>
+        </div>
+        <div class="flex gap-text-[#828F96]2">
+          <div><%= FontAwesome.icon("pencil", type: "solid", class: "h-6 w-6") %></div>
+          <div>
+            <span class="text-[#828F96] poppins-regular tracking-wide leading-10">
+              create your own odds
+            </span>
+          </div>
+        </div>
+        <div class="flex gap-2">
+          <div><%= FontAwesome.icon("chess-board", type: "solid", class: "h-6 w-6") %></div>
+          <div>
+            <span class="text-[#828F96] poppins-regular tracking-wide leading-10">
+              A seamless casino offering
+            </span>
+          </div>
+        </div>
+
+        <button
+          class="mx-auto bg-[#00A8FA] px-6 py-4 rounded mt-6"
+          onclick="showRegistrationForm()"
+        >
+          LET'S GET STARTED
+        </button>
+        <div class="flex gap-2 mx-auto mt-4">
+          <span class=" ">
+            Have an account?
+          </span>
+          <span class="">
+            <%= link("Log in",
+              to: Routes.user_session_path(@conn, :new),
+              class: "  text-[#00A8FA]"
+            ) %>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    style="display:none;z-index:4;"
+    id="leave"
+    class="absolute 	 left-[30%] shadow-2xl bg-white p-6 rounded-2xl top-[30%] h-[30%] w-[25%]"
+  >
+    <div>
+      <p class="poppins-bold text-lg mb-4 shadow text-[#828F96]">
+        Are you sure you want to leave?
+      </p>
+      <p class=" poppins-regular text-lg text-[#828F96]">
+        if you leave the registration process all the information you have entered will be deleted
+      </p>
+      <div class="ml-8 flex gap-2">
+        <button class="bg-[#00A8FA] px-4 py-2 text-white rounded-xl">Continue</button><button class="bg-red-600 px-4 py-2 text-white rounded-xl">Leave</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  function showRegistrationForm() {
+    var form = document.getElementById('registrationForm');
+    var startdiv = document.getElementById('startDiv');
+
+    if (form.style.display === 'none') {
+      form.style.display = 'block';
+      startdiv.style.display = 'none';
+    } else {
+      form.style.display = 'none';
+      startdiv.style.display = 'block';
+    }
+  }
+</script>
+<script>
+    function toggleLeave() {
+
+        var leaveDiv = document.getElementById('leave');
+        var overlay = document.getElementById('overlay');
+         if (leaveDiv.style.display === 'none') {
+    leaveDiv.style.display = 'block';
+   overlay.style.display="block"; // Add the blur class
+  } else {
+    leaveDiv.style.display = 'none';
+    overlay.style.display="none"; // Remove the blur class
+  }
+
+  overlay.addEventListener('click', function(event) {
+      if (event.target === overlay) {
+        leaveDiv.style.display = 'none';
+        overlay.style.display = 'none';
+      }
+    });
+   
+     }
+</script>

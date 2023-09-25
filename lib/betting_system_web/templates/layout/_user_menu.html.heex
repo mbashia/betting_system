@@ -1,0 +1,11 @@
+<ul>
+  <%= if @current_user do %>
+    <button class="bg-red-500">
+      <%= link("Settings", to: Routes.user_settings_path(@conn, :edit)) %>
+    </button>
+    <li><%= link("Log out", to: Routes.user_session_path(@conn, :delete), method: :delete) %></li>
+  <% else %>
+    <button><%= link("Register", to: Routes.user_registration_path(@conn, :new)) %></button>
+    <li><%= link("Log in", to: Routes.user_session_path(@conn, :new)) %></li>
+  <% end %>
+</ul>

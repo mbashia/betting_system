@@ -1,0 +1,216 @@
+<%= if @user.role == "admin" do %>
+  <%= if @live_action in [ :edit] do %>
+    <.modal return_to={Routes.user_index_path(@socket, :index)}>
+      <.live_component
+        module={BettingSystemWeb.UserLive.FormComponent}
+        id={@user.id || :new}
+        title={@page_title}
+        action={@live_action}
+        user={@user_edit}
+        return_to={Routes.user_index_path(@socket, :index)}
+      />
+    </.modal>
+  <% end %>
+
+  <div class="flex flex-col   w-[98%] gap-2">
+    <div class="flex flex-col gap-1">
+      <div class="flex flex-row items-end p-2 justify-between w-[100%]">
+        <div>
+          <span class="poppins-bold text-3xl text-white  uppercase ">Listing all users</span>
+        </div>
+        <%= live_patch(to: Routes.sport_index_path(@socket, :new)) do %>
+          <button class="bg-green-500 flex gap-2 items-center text-white  rounded-md p-2">
+            <%= Heroicons.icon("plus",
+              type: "solid",
+              class: "h-8   font-bold w-8"
+            ) %> New Sport
+          </button>
+        <% end %>
+      </div>
+    </div>
+    <div class="bg-[#202941] text-white   rounded-xl p-4 ">
+      <table class="w-[100%]">
+        <thead class="border-b-2 poppins-regular border-black">
+          <tr>
+            <th class="p-2 font-semibold ">image</th>
+
+            <th class="p-2 font-semibold ">firstname</th>
+            <th class="p-2 font-semibold ">second name</th>
+
+            <th class="p-2 font-semibold ">msisdn</th>
+
+            <th class="p-2 font-semibold ">role</th>
+            <th class="p-2 font-semibold ">status</th>
+
+            <th class="p-2 font-semibold ">actions</th>
+          </tr>
+        </thead>
+        <tbody id="events" class="poppins-light">
+          <%= for client <- @clients do %>
+            <tr
+              class="border-b-[1px] cursor-pointer text-center hover:bg-blue-100/50 transition-all ease-in-out duration-500  border-black"
+              id={"sport-#{client.id}"}
+            >
+              <td class="p-2">
+                <div class="flex fex-col justify-center items-center">
+                  <img src="/images/champe_no_bc.png" class="w-[50px] h-[50px] object-cover " />
+                </div>
+              </td>
+              <td><%= client.firstname %></td>
+
+              <td><%= client.lastname %></td>
+              <td><%= client.phone_number %></td>
+              <td><%= client.role %></td>
+
+              <td>
+                <%= if client.status == "active" do %>
+                  <span class="bg-green-500 text-white rounded-md p-1">
+                    <%= client.status %>
+                  </span>
+                <% else %>
+                  <span class="bg-red-500 text-white rounded-md p-1">
+                    <%= client.status %>
+                  </span>
+                <% end %>
+              </td>
+
+              <td>
+                <div class="flex flex-row gap-2 justify-center items-center">
+                  <div>
+                    <%= live_redirect(to: Routes.user_show_path(@socket, :show, client)) do %>
+                      <%= Heroicons.icon("eye",
+                        type: "solid",
+                        class: "h-6  group-hover:text-green-600 text-green-400 w-6"
+                      ) %>
+                    <% end %>
+                  </div>
+
+                  <div>
+                    <%= live_patch(to: Routes.user_index_path(@socket, :edit, client)) do %>
+                      <%= Heroicons.icon("pencil",
+                        type: "solid",
+                        class: "h-6  group-hover:text-blue-600 text-blue-400 w-6"
+                      ) %>
+                    <% end %>
+                  </div>
+                  <%= if client.status == "inactive" do %>
+                    <div title="activate user">
+                      <%= link(
+                    to: "#",
+                    phx_click: "delete",
+                    phx_value_id: client.id,
+                    data: [confirm: "Are you sure you want to activate user ?"]
+                  )  do %>
+                        <%= Heroicons.icon("lock-open",
+                          type: "solid",
+                          class: "h-6  group-hover:text-red-600 text-green-400 w-6"
+                        ) %>
+                      <% end %>
+                    </div>
+                  <% else %>
+                    <div title="deactivate user">
+                      <%= link(
+                    to: "#",
+                    phx_click: "delete",
+                    phx_value_id: client.id,
+                    data: [confirm: "Are you sure you want to deactivate user ?"]
+                  )  do %>
+                        <%= Heroicons.icon("lock-closed",
+                          type: "solid",
+                          class: "h-6  group-hover:text-red-600 text-red-400 w-6"
+                        ) %>
+                      <% end %>
+                    </div>
+                  <% end %>
+                </div>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+<% else %>
+  <div class="h-[70vh] m-8 bg-[#202941] rounded-lg pt-6 ">
+    <div class="flex justify-around m-6 p-4 border-[1px]  border-gray-700 rounded-lg shadow-2xl  text-[white] poppins-regular">
+      <div class="flex items-center space-x-2  font-semibold text-white leading-8">
+        <span clas="text-green-500">
+          <svg
+            class="h-5"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
+            />
+          </svg>
+        </span>
+        <span class="tracking-wide">About</span>
+      </div>
+      <div class="flex flex-col  ">
+        <div class="flex justify-around  m-4 ml-[-45px]">
+          <div class="  ">
+            <span>
+              <label class="poppins-bold text-lg mr-4 uppercase">firstname:</label> <%= @user.firstname %>
+            </span>
+          </div>
+          <div class="">
+            <span>
+              <label class="poppins-bold text-lg mr-4 uppercase">lastname:</label><%= @user.lastname %>
+            </span>
+          </div>
+        </div>
+        <div class="flex justify-around  m-4 ">
+          <div class="mr-6">
+            <span>
+              <label class="poppins-bold text-lg mr-4 uppercase">phone number:</label><%= @user.phone_number %>
+            </span>
+          </div>
+
+          <div class="mr-6">
+            <span>
+              <label class="poppins-bold text-lg mr-4 uppercase">email:</label><%= @user.email %>
+            </span>
+          </div>
+        </div>
+        <button phx-click="bet history" class="cursor:pointer">view bet history</button>
+      </div>
+
+      <div></div>
+    </div>
+    <%= if @check_bet_history == 1 do %>
+      <div class=" bg-[#1C2439] flex flex-col    absolute right-[250px]  rounded-2xl top-[130px] h-[73%] w-[45%] p-4 pt-6 overflow-y-auto">
+        <div class="flex justify-between ">
+          <div></div>
+
+          <div>
+            <p class="poppins-bold text-lg text-white ">
+              you have <%= length(@bets) %> <%= @number %>
+            </p>
+          </div>
+
+          <div>
+            <button phx-click="close_pop_up">
+              <span class="text-[#92a0ca] poppins-bold uppercase text-lg ">X</span>
+            </button>
+          </div>
+        </div>
+
+        <%= for bet <- @bets do %>
+          <div class="p-4 w-[100%] text-white poppins-regular border-[1px] border-gray-700 ">
+            <p>bet id:#<%= bet.bet_id %></p>
+            <p>amount:<%= bet.amount %></p>
+            <p>payout:<%= bet.payout %></p>
+            <p style="color:brown;"><%= bet.status %></p>
+            <p>result:<%= bet.end_result %></p>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+<% end %>

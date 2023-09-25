@@ -1,0 +1,82 @@
+<div class="h-[70vh] m-8 bg-[#202941] rounded-lg pt-6 ">
+  <div class="flex justify-around m-6 p-4 border-[1px]  border-gray-700 rounded-lg shadow-2xl  text-[white] poppins-regular">
+    <div class="flex items-center space-x-2  font-semibold text-white leading-8">
+      <span clas="text-green-500">
+        <svg
+          class="h-5"
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
+          />
+        </svg>
+      </span>
+      <span class="tracking-wide">About</span>
+    </div>
+    <div class="flex flex-col  ">
+      <div class="flex justify-around  m-4 ml-[-45px]">
+        <div class="  ">
+          <span>
+            <label class="poppins-bold text-lg mr-4 uppercase">firstname:</label> <%= @system_user.firstname %>
+          </span>
+        </div>
+        <div class="">
+          <span>
+            <label class="poppins-bold text-lg mr-4 uppercase">lastname:</label><%= @system_user.lastname %>
+          </span>
+        </div>
+      </div>
+      <div class="flex justify-around  m-4 ">
+        <div class="mr-6">
+          <span>
+            <label class="poppins-bold text-lg mr-4 uppercase">phone number:</label><%= @system_user.phone_number %>
+          </span>
+        </div>
+
+        <div class="mr-6">
+          <span>
+            <label class="poppins-bold text-lg mr-4 uppercase">email:</label><%= @system_user.email %>
+          </span>
+        </div>
+      </div>
+      <button phx-click="bet history" class="cursor:pointer">view bet history</button>
+    </div>
+
+    <div></div>
+  </div>
+  <%= if @check_bet_history == 1 do %>
+    <div class=" bg-[#1C2439] flex flex-col    absolute right-[250px]  rounded-2xl top-[130px] h-[73%] w-[45%] p-4 pt-6 overflow-y-auto">
+      <div class="flex justify-between ">
+        <div></div>
+
+        <div>
+          <p class="poppins-bold text-lg text-white ">
+            <%= @system_user.firstname %> <%= @system_user.lastname %> has <%= length(@bets) %> <%= @number %>
+          </p>
+        </div>
+
+        <div>
+          <button phx-click="close_pop_up">
+            <span class="text-[#92a0ca] poppins-bold uppercase text-lg ">X</span>
+          </button>
+        </div>
+      </div>
+
+      <%= for bet <- @bets do %>
+        <div class="p-4 w-[100%] text-white poppins-regular border-[1px] border-gray-700 ">
+          <p>bet id:#<%= bet.bet_id %></p>
+          <p>amount:<%= bet.amount %></p>
+          <p>payout:<%= bet.payout %></p>
+          <p style="color:brown;"><%= bet.status %></p>
+          <p>result:<%= bet.end_result %></p>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+</div>

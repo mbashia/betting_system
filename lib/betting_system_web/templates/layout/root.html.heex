@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <%= csrf_meta_tag() %>
+    <%= live_title_tag(assigns[:page_title] || "BettingSystem", suffix: " · Phoenix Framework") %>
+    <link phx-track-static rel="stylesheet" href={Routes.static_path(@conn, "/assets/app.css")} />
+    <script
+      defer
+      phx-track-static
+      type="text/javascript"
+      src={Routes.static_path(@conn, "/assets/app.js")}
+    >
+    </script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js">
+    </script>
+    <script src="https://cdn.jsdelivr.net/momentjs/2.14.1/moment.min.js">
+    </script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.js
+
+
+
+"
+    >
+    </script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.2.3/flatpickr.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.2.3/themes/dark.css"
+    />
+
+    <style>
+               .glow {
+              font-size: 70px;
+              color: #ffffff;
+              text-align: center;
+              text-shadow: 0 0 10px #eeeeee, 0 0 20px #000000, 0 0 30px #000000, 0 0 40px #000000, 
+                           0 0 50px #4da6ff, 0 0 60px #4da6ff, 0 0 70px #4da6ff;
+            }
+                ::-webkit-scrollbar {
+        width: 7px; /* Set the width of the scrollbar */
+      }
+
+      ::-webkit-scrollbar-thumb {
+        background-color: #141C33; /* Set the color of the thumb */
+      }
+          
+    </style>
+  </head>
+  <body class="bg-[#060C1F] relative">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js">
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.2.3/flatpickr.js">
+    </script>
+
+    <%= @inner_content %>
+    <script>
+          function toggle(){
+            element = document.getElementById("myDropdown").classList.toggle("invisible");
+          }
+          document.addEventListener("click", function(event) {
+                      var dropdown = document.querySelector(".dropdownlist");
+                      var dropButton = document.querySelector(".drop-button");
+
+                      if (dropdown && !dropdown.contains(event.target) && !dropButton.contains(event.target)) {
+                              if (!dropdown.classList.contains('invisible')) {
+                              dropdown.classList.add('invisible');
+                  }
+          }
+      });
+    </script>
+  </body>
+</html>

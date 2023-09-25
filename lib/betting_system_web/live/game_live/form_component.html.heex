@@ -1,0 +1,111 @@
+<div class="bg-[#202941] text-white poppins-regular ">
+  <h2 class="text-[#92a0ca] poppins-bold text-4xl ml-[40%]"><%= @title %></h2>
+  <.form
+    let={f}
+    for={@changeset}
+    id="game-form"
+    phx-target={@myself}
+    phx-submit="save"
+    phx-validate="validate"
+  >
+    <div class=" p-4 gap-4 w-[100%] flex flex-col  poppins-regular">
+      <div class="flex   justify-between w-[full]	 ">
+        <div class="w-[50%]  flex gap-2   flex-col  p-2  ">
+          <%= label(f, :sport, class: "text-sm text-[#92a0ca] poppins-bold  w-[20%] ") %>
+          <%= select(f, :sport_id, @sports,
+            prompt: "Select a sport",
+            class:
+              "w-[95%] rounded-lg text-black border-transparent focus:border-transparent focus:ring-0 p-2 focus:outline-[#2563EB]"
+          ) %>
+          <%= error_tag(f, :sport_id) %>
+        </div>
+        <div class="w-[50%]   flex gap-2   flex-col  p-2  ">
+          <%= label(f, :date, class: "text-sm text-[#92a0ca] poppins-bold w-[20%]") %>
+          <input
+            type="datetime-local"
+            id="datetimeInput"
+            name="datetime"
+            class="text-black w-[95%] rounded-lg"
+          />
+
+          <%= text_input(f, :date, class: "w-[70%] text-black", type: "hidden", id: "hiddenInput") %>
+
+          <%= error_tag(f, :date) %>
+        </div>
+      </div>
+
+      <div class="flex justify-between   	w-[full] ">
+        <div class="w-[50%]  flex gap-2   flex-col  p-2  ">
+          <%= label(f, :team1, class: "text-sm text-[#92a0ca] poppins-bold  ") %>
+          <%= text_input(f, :team1, class: " w-[95%] text-black rounded-lg ") %>
+          <%= error_tag(f, :team1) %>
+        </div>
+        <div class="w-[50%]  flex gap-2   flex-col  p-2  ">
+          <%= label(f, :team2, class: "text-sm text-[#92a0ca] poppins-bold  ") %>
+          <%= text_input(f, :team2, class: " w-[95%] text-black rounded-lg ") %>
+          <%= error_tag(f, :team2) %>
+        </div>
+      </div>
+      <div class="flex justify-between	w-[full] ">
+        <div class="w-[50%]  flex gap-2   flex-col  p-2  ">
+          <%= label(f, :status, class: "text-sm text-[#92a0ca] poppins-bold w-[20%] ") %>
+          <%= select(f, :status, ["pending", "completed", "in progress"],
+            prompt: "set status",
+            class: "w-[95%] text-black rounded-lg "
+          ) %>
+          <%= error_tag(f, :status) %>
+        </div>
+        <div class="w-[50%]  flex gap-2   flex-col  p-2  ">
+          <%= label(f, :result, class: "text-sm text-[#92a0ca] poppins-bold w-[20%] ") %>
+          <%= select(f, :result, ["pending", "team1 win", "game_draw", "team2 win"],
+            prompt: "set result",
+            class: "w-[95%] text-black rounded-lg "
+          ) %>
+          <%= error_tag(f, :result) %>
+        </div>
+      </div>
+
+      <div class="flex justify-between	w-[full] ">
+        <div class="w-[50%]  flex gap-2   flex-col  p-2  ">
+          <%= label(f, :location, class: "text-sm text-[#92a0ca] poppins-bold w-[20%] ") %>
+          <%= text_input(f, :location, class: "w-[95%] text-black rounded-lg ") %>
+          <%= error_tag(f, :location) %>
+        </div>
+        <div class="w-[50%]  flex gap-2   flex-col  p-2  ">
+          <%= label(f, :win, class: "text-sm text-[#92a0ca] poppins-bold w-[20%] ") %>
+          <%= number_input(f, :win, step: "any", class: "w-[95%] text-black rounded-lg ") %>
+          <%= error_tag(f, :win) %>
+        </div>
+      </div>
+
+      <div class="flex justify-between	w-[full] ">
+        <div class="w-[50%]  flex gap-2   flex-col  p-2  ">
+          <%= label(f, :draw, class: "text-sm text-[#92a0ca] poppins-bold w-[20%] ") %>
+          <%= number_input(f, :draw, step: "any", class: "w-[95%] text-black rounded-lg ") %>
+          <%= error_tag(f, :draw) %>
+        </div>
+        <div class="w-[50%]  flex gap-2   flex-col  p-2  ">
+          <%= label(f, :lose, class: "text-sm text-[#92a0ca] poppins-bold w-[20%] ") %>
+          <%= number_input(f, :lose, step: "any", class: "w-[95%] text-black rounded-lg ") %>
+          <%= error_tag(f, :lose) %>
+        </div>
+      </div>
+
+      <div class="p-2  poppins-regular flex items-center justify-center">
+        <div class="py-2 px-12 rounded-lg bg-[#00A8FA] ">
+          <%= submit("Save", phx_disable_with: "Saving...") %>
+        </div>
+      </div>
+    </div>
+  </.form>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      var datetimeInput = document.getElementById('datetimeInput');
+      var hiddenInput = document.getElementById('hiddenInput');
+
+      datetimeInput.addEventListener('change', function() {
+        hiddenInput.value = datetimeInput.value;
+      });
+    });
+  </script>
+</div>

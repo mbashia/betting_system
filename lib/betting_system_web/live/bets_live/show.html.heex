@@ -1,0 +1,42 @@
+<h1>Show Bets</h1>
+
+<%= if @live_action in [:edit] do %>
+  <.modal return_to={Routes.bets_show_path(@socket, :show, @bets)}>
+    <.live_component
+      module={BettingSystemWeb.BetsLive.FormComponent}
+      id={@bets.id}
+      title={@page_title}
+      action={@live_action}
+      bets={@bets}
+      return_to={Routes.bets_show_path(@socket, :show, @bets)}
+    />
+  </.modal>
+<% end %>
+
+<ul>
+  <li>
+    <strong>Amount:</strong>
+    <%= @bets.amount %>
+  </li>
+
+  <li>
+    <strong>Odds:</strong>
+    <%= @bets.odds %>
+  </li>
+
+  <li>
+    <strong>Status:</strong>
+    <%= @bets.status %>
+  </li>
+
+  <li>
+    <strong>Payout:</strong>
+    <%= @bets.payout %>
+  </li>
+</ul>
+
+<span>
+  <%= live_patch("Edit", to: Routes.bets_show_path(@socket, :edit, @bets), class: "button") %>
+</span>
+|
+<span><%= live_redirect("Back", to: Routes.bets_index_path(@socket, :index)) %></span>

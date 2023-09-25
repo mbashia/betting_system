@@ -1,0 +1,60 @@
+<div class=" betslip-div  bg-blue-[#141C33] w-[30%] text-white">
+    <div class="w-[full] bg-[#202A39] p-2">
+      <p class="poppins-regular text-white">Betslip</p>
+    </div>
+    <div
+      class="flex w-[full] justify-around  border-b-[1px] pb-2 text-[#8A92AB]"
+      style=" border-color:rgba(123,131,156,.6); "
+    >
+      <div>Single</div>
+      <div>Multiple</div>
+
+      <div>System</div>
+    </div>
+    <%= if @bets == "" do %>
+      <div class = "poppins-light text-sm ml-4">no bet yet</div>
+    <% else %>
+      <%= for bet <- @bets do %>
+        <div
+          class="border-b-[1px] poppins-regular text-[#8A92AB] p-6"
+          style=" border-color:rgba(123,131,156,.6); "
+        >
+          <div class="flex justify-between">
+            <span class="text-sm"><%= bet.game.team1 %>vs<%= bet.game.team2 %></span>
+            <button phx-click="cancel" phx-value-cancel={bet.id}>X</button>
+          </div>
+          <div class="flex gap-2">
+            <div class="h-[10px] w-[10px] mr-4 ">x<%= bet.odds %></div>
+            <div class=" text-base">chelsea</div>
+          </div>
+        </div>
+      <% end %>
+      <!--end of div-->
+      <div class="bet-details-div  text-[#8A92AB]">
+        <div class="flex justify-between p-2">
+          <p>balance</p>
+          <p>1000000</p>
+        </div>
+        <div class="flex justify-between p-2">
+          <p>total odds</p>
+          <p><%= @total_odds %></p>
+        </div>
+
+        <div class="flex justify-between p-2">
+          <p>payout</p>
+          <p><%= @payout%></p>
+        </div>
+      </div>
+      <.form let={f} for={@changeset} id="bets-form"phx-change = "validate_amount" phx-submit="place_bet " >
+        <%= number_input(f, :amount, step: "any", placeholder: "Amount(KES)", class: "w-[full] text-black") %>
+        <%= error_tag(f, :amount) %>
+
+        <%= number_input(f, :odds, step: "any", type: "hidden", value: @total_odds) %>
+        <%= error_tag(f, :odds) %>
+
+        <div class = "ml-6 bg-[#FA6838] w-[100px] rounded  p-2 mt-4">
+          <%= submit("place bet", phx_disable_with: "Saving...", class: "poppins-regular") %>
+        </div>
+      </.form>
+    <% end %>
+  </div>
