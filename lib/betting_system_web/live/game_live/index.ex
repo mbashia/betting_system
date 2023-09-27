@@ -11,7 +11,6 @@ defmodule BettingSystemWeb.GameLive.Index do
 
   @impl true
   def mount(_params, session, socket) do
-
     user = Accounts.get_user_by_session_token(session["user_token"])
     sports = Sports.list_sports(user.id)
     selected_bets = Betslips.get_betslips(user.id)
@@ -19,10 +18,8 @@ defmodule BettingSystemWeb.GameLive.Index do
     IO.inspect(socket, structs: false)
 
     peer_data = get_connect_info(socket, :peer_data)
-     ip_addr = :inet_parse.ntoa(peer_data.address) |> to_string()
-     IO.inspect(ip_addr)
-
-
+    ip_addr = :inet_parse.ntoa(peer_data.address) |> to_string()
+    IO.inspect(ip_addr)
 
     {:ok,
      socket

@@ -1,17 +1,17 @@
 <div
   id="mainDiv"
-  class="h-[100vh] w-[100vw] bg-[#071C27] relative border   border-transparent text-white"
+  class=" md:h-[100vh] md:w-[100vw] bg-[#071C27] relative border   border-transparent text-white"
   style="z-index:2;"
 >
   <div
-    style="display:none; background-color:rgba(0,0,0, 0.5); z-index:3;"
+    style="display:none; background-color:rgba(0,0,0, 0.7); z-index:3; "
     id="overlay"
-    class=" absolute top-0 right-0  h-[100%] w-[100%] "
+    class=" absolute top-0 right-0  h-[100vh] w-[100%]  "
   >
   </div>
 
-  <div class="m-10 mb-14 w-[95%] flex justify-between p-6  ">
-    <span class="poppins-bold text-white text-3xl">SportOdds</span>
+  <div class=" m-4 md:m-10  mb-14 w-auto overflow-auto md:w-[95%] flex justify-between md:p-6  ">
+    <span class="poppins-bold text-white  text-xl md:text-3xl">SportOdds</span>
     <div class="flex gap-2 ">
       <button onclick="toggleLeave()" class="  align-top">
         <%= Heroicons.icon("x-mark", type: "outline", class: "h-6 w-6 text-white inline-block ") %>
@@ -19,7 +19,7 @@
       </button>
     </div>
   </div>
-  <div class="ml-[150px] poppins-bold text-lg text-white">
+  <div class=" hidden md:contents md:ml-[100px] poppins-bold text-lg text-white">
     <p class="whitespace-normal break-words">Complete the following information
       .</p>
 
@@ -47,7 +47,7 @@
   <div
     style="display:none;"
     id="registrationForm"
-    class=" bg-[#E5F2FC] flex flex-col    absolute right-[250px]  rounded-2xl top-[130px] h-[73%] w-[35%] p-4"
+    class="bg-[#E5F2FC]    flex flex-col ml-8 top-[130px]  absolute overflow-auto  h-auto w-[85%] md:right-[250px] md:top-[130px] rounded-2xl  md:h-[73%] md:w-[35%] p-4 pb-8"
   >
     <.form let={f} for={@changeset} action={Routes.user_registration_path(@conn, :create)}>
       <%= if @changeset.action do %>
@@ -56,7 +56,7 @@
         </div>
       <% end %>
       <span class="poppins-bold text-[#0E1C27] text-2xl ml-10 ">Register</span>
-      <div class="m-4 text-[#828F96]">
+      <div class="m-4 text-[#828F96] w-auto">
         <%= text_input(f, :firstname,
           required: true,
           placeholder: " firstname",
@@ -64,7 +64,7 @@
         ) %>
         <%= error_tag(f, :firstname) %>
       </div>
-      <div class="m-4 text-[#828F96]">
+      <div class="m-4 text-[#828F96] w-auto">
         <%= text_input(f, :lastname,
           required: true,
           placeholder: " lastname",
@@ -72,7 +72,7 @@
         ) %>
         <%= error_tag(f, :lastname) %>
       </div>
-      <div class="m-4 text-[#828F96]">
+      <div class="m-4 text-[#828F96] w-auto">
         <%= number_input(f, :phone_number,
           required: true,
           placeholder: " enter phone number",
@@ -80,7 +80,7 @@
         ) %>
         <%= error_tag(f, :phone_number) %>
       </div>
-      <div class="m-4 text-[#828F96]">
+      <div class="m-4 text-[#828F96] w-auto">
         <%= email_input(f, :email,
           required: true,
           placeholder: " enter  email",
@@ -89,7 +89,7 @@
 
         <%= error_tag(f, :email) %>
       </div>
-      <div class="m-4 text-[#828F96]">
+      <div class="m-4 text-[#828F96] w-auto">
         <%= password_input(f, :password,
           required: true,
           placeholder: " enter password",
@@ -98,11 +98,11 @@
         <%= error_tag(f, :password) %>
       </div>
 
-      <div class=" inline-block p-1 ml-[150px] px-6 bg-[#00A8FA]  rounded ">
+      <div class=" inline-block p-1 ml-[30%] md:ml-[150px] px-6 bg-[#00A8FA]  rounded ">
         <%= submit("Register") %>
       </div>
     </.form>
-    <span class="mx-auto mt-2">
+    <span class="md:mx-auto mt-2">
       <%= link("Log in",
         to: Routes.user_session_path(@conn, :new),
         class: " ml-[20%] text-[#00A8FA]"
@@ -115,10 +115,11 @@
   </div>
 
   <div
+  style = "display:block;"
     id="startDiv"
-    class="bg-[#E5F2FC] absolute right-[250px]  rounded-2xl top-[130px] h-[65%] w-[35%] p-4"
+    class="bg-[#E5F2FC] absolute ml-2 mr-2 top-[130px] md:right-[250px] rounded-2xl md:top-[130px] w-auto overflow-auto  h-auto md:h-[65%] md:w-[35%]  "
   >
-    <div class="text-black ml-8 m-4 p-4">
+    <div class="text-black ml-6 md:ml-8 m-2 md:m-4 p-2 md:p-4">
       <span class=" poppins-bold text-lg text-[#828F96] m-4 ">Welcome to SportOdds</span>
       <p class="text-xl  poppins-bold text-[#071C27] mt-2">Join the player community</p>
 
@@ -187,7 +188,7 @@
   <div
     style="display:none;z-index:4;"
     id="leave"
-    class="absolute 	 left-[30%] shadow-2xl bg-white p-6 rounded-2xl top-[30%] h-[30%] w-[25%]"
+    class="absolute top-[]  m-4	 md:left-[30%] shadow-2xl bg-white p-6 rounded-2xl md:top-[30%] md:h-[35%] md:w-[25%]"
   >
     <div>
       <p class="poppins-bold text-lg mb-4 shadow text-[#828F96]">

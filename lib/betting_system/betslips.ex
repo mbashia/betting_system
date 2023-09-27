@@ -90,12 +90,11 @@ defmodule BettingSystem.Betslips do
 
   ## Examples
 
-      # iex> update_betslip(betslip, %{field: new_value})
-      # {:ok, %Betslip{}}
+  # iex> update_betslip(betslip, %{field: new_value})
+  # {:ok, %Betslip{}}
 
-      # iex> update_betslip(betslip, %{field: bad_value})
-      # {:error, %Ecto.Changeset{}}
-
+  # iex> update_betslip(betslip, %{field: bad_value})
+  # {:error, %Ecto.Changeset{}}
 
   def update_betslip(%Betslip{} = betslip, attrs) do
     betslip
