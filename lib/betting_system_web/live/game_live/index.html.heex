@@ -12,6 +12,19 @@
     />
   </.modal>
 <% end %>
+<div class = "absolute top-[120px] right-[20px]"></div>
+<div style ="z-index:8;" class ="relative pt-[7px]  flex justify-evenly  w-[120px] h-[40px] bg-[#0097E1]">
+<div>  <%= Heroicons.icon("bookmark",
+            type: "solid",
+            class: "h-6  text-white font-bold w-6"
+          ) %></div>
+<div>
+<span class ="poppins-regular te
+xt-base text-white align-top uppercase"> betslip</span>
+<div class = "fixed top-0 left-0 h-[15px] w-[15px] bg-yellow-500 ">3</div>
+</div>
+
+</div>
 
 <div class="main-div h-[100vh] flex relative flex-row gap-2 pt-4 
 ">
@@ -22,7 +35,6 @@
     >
       <span>Highlights</span><span>Upcoming</span><span>Countries</span><span>Quick e</span>
     </div>
-
     <%= if @user.role == "admin" do %>
       <div class="mt-2 flex justify-between p-2 ">
         <div class=" md:hidden " id="sidebar" onclick="toggleSidebar()">
