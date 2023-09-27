@@ -15,7 +15,7 @@
 
 <div class="main-div h-[100vh] flex relative flex-row gap-2 pt-4 
 ">
-  <div class="w-[70%] bg-[#141C33] rounded p-2   h-[80%] overflow-y-auto ">
+  <div class="w-auto md:w-[70%] bg-[#141C33] rounded p-2   h-[80%] overflow-y-auto ">
     <div
       style="border-color:rgba(123,131,156,.6);"
       class="flex justify-evenly poppins-regular pb-2 border-b-[1px] text-[#8A92AB]"
@@ -24,7 +24,14 @@
     </div>
 
     <%= if @user.role == "admin" do %>
-      <div class="mt-2">
+      <div class="mt-2 flex justify-between p-2 ">
+        <div class=" md:hidden " id="sidebar" onclick="toggleSidebar()">
+          <%= Heroicons.icon("bars-3",
+            type: "solid",
+            class: "h-8  text-[#8A92AB] font-bold w-8"
+          ) %>
+        </div>
+
         <%= live_patch(to: Routes.game_index_path(@socket, :new)) do %>
           <button class="bg-green-500 flex gap-2 items-center text-white  rounded-md p-2">
             <%= Heroicons.icon("plus",
@@ -120,7 +127,7 @@
       </div>
     <% end %>
   </div>
-  <div class=" betslip-div  bg-blue-[#141C33] w-[30%] h-[100vh] text-white">
+  <div class=" hidden md:block betslip-div  bg-blue-[#141C33] w-[30%] h-[100vh] text-white">
     <div class="h-[45%] overflow-y-auto">
       <div class="w-[full] bg-[#202A39] p-2">
         <p class="poppins-regular text-white">Betslip</p>

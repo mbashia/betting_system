@@ -37,20 +37,24 @@
     />
 
     <style>
-               .glow {
-              font-size: 70px;
-              color: #ffffff;
-              text-align: center;
-              text-shadow: 0 0 10px #eeeeee, 0 0 20px #000000, 0 0 30px #000000, 0 0 40px #000000, 
-                           0 0 50px #4da6ff, 0 0 60px #4da6ff, 0 0 70px #4da6ff;
+                     .glow {
+                    font-size: 70px;
+                    color: #ffffff;
+                    text-align: center;
+                    text-shadow: 0 0 10px #eeeeee, 0 0 20px #000000, 0 0 30px #000000, 0 0 40px #000000, 
+                                 0 0 50px #4da6ff, 0 0 60px #4da6ff, 0 0 70px #4da6ff;
+                  }
+                      ::-webkit-scrollbar {
+              width: 7px; /* Set the width of the scrollbar */
             }
-                ::-webkit-scrollbar {
-        width: 7px; /* Set the width of the scrollbar */
-      }
 
-      ::-webkit-scrollbar-thumb {
-        background-color: #141C33; /* Set the color of the thumb */
+            ::-webkit-scrollbar-thumb {
+              background-color: #141C33; /* Set the color of the thumb */
+            }
+            .translate-x-0 {
+        transform: translateX(0); /* Move the sidebar in from the left */
       }
+                
           
     </style>
   </head>
@@ -75,6 +79,18 @@
                   }
           }
       });
+    </script>
+    <script>
+      function toggleSidebar() {
+        var sidebar = document.getElementById('menu');
+        sidebar.classList.toggle('hidden');
+
+      }
+
+      function closeside() {
+        var sidebar = document.getElementById('menu');
+        sidebar.classList.add('hidden');
+      }
     </script>
   </body>
 </html>

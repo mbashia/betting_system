@@ -11,11 +11,11 @@
     </p>
   <% end %>
 
-  <nav class="flex justify-between bg-[#202A39]  text-white p-[30px]">
+  <nav class="flex md:justify-between bg-[#202A39]  text-white p-4 md:p-[30px]">
     <div class="">
-      <p class="text-xl font-semibold poppins-bold">SportOdds</p>
+      <p class=" text-sm md:text-xl font-semibold poppins-bold">SportOdds</p>
     </div>
-    <div class="poppins-light">
+    <div class="text-sm md:text-base poppins-light">
       <a class="m-2 border-b border-transparent  hover:border-white" href="#">live</a>
       <a class="m-2 border-b border-transparent  hover:border-white" href="#">betting</a>
 
@@ -35,7 +35,7 @@
           <%= Heroicons.icon("user-circle", type: "outline", class: "h-6 w-6") %>
         </div>
         <div class="flex items-center justify-center">
-          <%= Heroicons.icon("chevron-down", type: "outline", class: "h-4 w-4") %>
+          <%= Heroicons.icon("chevron-down", type: "outline", class: "h-6 w-6 ") %>
         </div>
       </div>
     </div>
@@ -64,168 +64,184 @@
     <% end %>
   </div>
 
-  <div class="bg-[#161F2C] flex justify-evenly poppins-light text-white  p-2">
-    <div class="flex flex-col bg-[#202A39] items-center justify-center w-[12%] rounded h-[70px]">
+  <div class="bg-[#161F2C] flex justify-between md:justify-evenly poppins-light text-white  p-2">
+    <div class="flex flex-col bg-[#202A39] items-center justify-center w-[50px] md:w-[12%] rounded h-[70px]">
       <div class="ml-2"><%= FontAwesome.icon("house", type: "solid", class: "h-4 w-4") %></div>
-      <div>home</div>
+      <div class="text-xs">home</div>
     </div>
-    <div class="flex flex-col bg-[#202A39] items-center justify-center w-[12%] rounded h-[70px]">
+    <div class="flex flex-col bg-[#202A39] items-center justify-center w-[50px] md:w-[12%] rounded h-[70px]">
       <div class="ml-2">
         <%= FontAwesome.icon("tower-broadcast", type: "solid", class: "h-4 w-4") %>
       </div>
-      <div>live</div>
+      <div class="text-xs">live</div>
     </div>
-    <div class="flex flex-col bg-[#202A39] items-center justify-center w-[12%] rounded h-[70px]">
+    <div class="flex flex-col bg-[#202A39] items-center justify-center w-[50px] md:w-[12%] rounded h-[70px]">
       <div class="ml-2">
         <%= FontAwesome.icon("calendar", type: "regular", class: "h-4 w-4") %>
       </div>
-      <div>Today</div>
+      <div class=" text-xs">Today</div>
     </div>
-    <div class="flex flex-col bg-[#202A39] items-center justify-center w-[12%] rounded h-[70px]">
+    <div class="flex flex-col bg-[#202A39] items-center justify-center w-[50px] md:w-[12%] rounded h-[70px]">
       <div class="ml-2">
         <%= FontAwesome.icon("futbol", type: "regular", class: "h-4 w-4") %>
       </div>
-      <div>football</div>
+      <div class="text-xs">football</div>
     </div>
-    <div class="flex flex-col bg-[#202A39] items-center justify-center w-[12%] rounded h-[70px]">
+    <div class="flex flex-col bg-[#202A39] items-center justify-center w-[55px] md:w-[12%]  rounded h-[70px]">
       <div class="ml-2">
         <%= FontAwesome.icon("basketball", type: "solid", class: "h-4 w-4") %>
       </div>
-      <div>baskteball</div>
+      <div class=" text-xs">baskteball</div>
     </div>
-    <div class="flex flex-col bg-[#202A39] items-center justify-center w-[12%] rounded h-[70px]">
+    <div class="flex flex-col bg-[#202A39] items-center justify-center w-[50px] md:w-[12%] rounded h-[70px]">
       <div class="ml-2">
         <%= FontAwesome.icon("football", type: "solid", class: "h-4 w-4") %>
       </div>
-      <div>Rugby</div>
+      <div class="text-xs">Rugby</div>
     </div>
   </div>
-
-  <div style=" position: absolute;
-    padding-top:180px;
-    top: 30px;
-    left: 0px;
-    bottom: 0px;
-    width: 300px; height:100%; ">
-    <div style="display:flex; flex-direction:column; width:100% height:100%;">
+  <div
+    class="absolute pt-[180px] top-[30px] left-[0px] bottom-[0px] width-[300px] h-[100%]"
+    style=" 
+    z-index:4;"
+  >
+    <div class="flex-col w-[100%] h-[100%]">
       <%= if @user.role == "admin" || @user.role == "superadmin" do %>
-        <div class="mx-[20px] mb-[20px]" style=" padding:2px; color:blue;">dashboard</div>
-        <div style="margin:20px; padding:2px; color:blue;">
-          <span>
-            <%= live_redirect(" sports", to: Routes.sport_index_path(@socket, :index)) %>
-          </span>
-        </div>
-        <div style="margin:20px; padding:2px; color:blue;">
-          <span><%= live_redirect(" Games", to: Routes.game_index_path(@socket, :index)) %></span>
-        </div>
-        <div style="margin:20px; padding:2px; color:blue;">
-          <span>
-            <%= live_redirect(" simulate games",
-              to: Routes.simulategames_index_path(@socket, :index)
-            ) %>
-          </span>
-        </div>
-        <div style="margin:20px; padding:2px; color:blue;">
-          <span>
-            <%= live_redirect(" system users", to: Routes.user_index_path(@socket, :index)) %>
-          </span>
-        </div>
-        <div style="margin:20px; padding:2px; color:blue;">
-          <span>
-            <%= live_redirect(" my profile", to: Routes.user_index_path(@socket, :index)) %>
-          </span>
+        <div
+          id="menu"
+          style="z-index:4; "
+          class="hidden  md:contents w-auto h-auto flex-col border border-gray-700 bg-[#141C33] md:bg-[#060C1F] rounded   "
+        >
+          <div class="md:hidden flex justify-between p-2 m-2" onclick="closeside()">
+            <div></div>
+            <span class="poppins-bold text-2xl text-[#8A92AB]">
+              X
+            </span>
+          </div>
+          <div class="m-[20px] p-[20px]  text-[#8A92AB]">
+            <span>dashboard</span>
+          </div>
+          <div class=" m-[20px] p-[20px]  text-[#8A92AB]">
+            <span>
+              <%= live_redirect(" sports", to: Routes.sport_index_path(@socket, :index)) %>
+            </span>
+          </div>
+          <div class=" m-[20px] p-[20px]  text-[#8A92AB]">
+            <span>
+              <%= live_redirect(" Games", to: Routes.game_index_path(@socket, :index)) %>
+            </span>
+          </div>
+          <div class=" m-[20px] p-[20px]  text-[#8A92AB]">
+            <span>
+              <%= live_redirect(" simulate games",
+                to: Routes.simulategames_index_path(@socket, :index)
+              ) %>
+            </span>
+          </div>
+          <div class=" m-[20px] p-[20px]  text-[#8A92AB]">
+            <span>
+              <%= live_redirect(" system users", to: Routes.user_index_path(@socket, :index)) %>
+            </span>
+          </div>
+          <div class=" m-[20px] p-[20px]  text-[#8A92AB]">
+            <span>
+              <%= live_redirect(" my profile", to: Routes.user_index_path(@socket, :index)) %>
+            </span>
+          </div>
         </div>
       <% else %>
-        <div class="mb-2">
-          <div class="mx-[20px]  bg-[#202a39] h-[50px] p-2 ">
-            <span class="poppins-regular  text-white">
-              Popular Events
-            </span>
+        <div class="hidden md:contents">
+          <div class="mb-2">
+            <div class="mx-[20px]  bg-[#202a39] h-[50px] p-2 ">
+              <span class="poppins-regular  text-white">
+                Popular Events
+              </span>
+            </div>
+            <div
+              style=" border-color:rgba(123,131,156,.6); "
+              class="flex mx-[20px] border-b-[1px] border-t-[1px]   bg-[#141c33]"
+            >
+              <div class="w-[25%]  ">
+                <img
+                  src="/images/WC_no_background.png"
+                  alt="scadvert logo"
+                  class="object-scale-down h-[90%] w-[90%]  "
+                />
+              </div>
+              <div class="poppins-regular  text-white">
+                World Cup 2022
+              </div>
+            </div>
+            <div
+              style=" padding:2px; border-color:rgba(123,131,156,.6); "
+              class="flex mx-[20px] border-b-[1px] border-t-[1px]  bg-[#141c33]"
+            >
+              <div class="w-[25%]">
+                <img
+                  src="/images/champe_no_bc.png"
+                  alt="scadvert logo"
+                  class="object-scale-down h-[90%] w-[90%]  "
+                />
+              </div>
+              <div class="poppins-regular  text-white">
+                Champions League
+              </div>
+            </div>
           </div>
-          <div
-            style=" border-color:rgba(123,131,156,.6); "
-            class="flex mx-[20px] border-b-[1px] border-t-[1px]   bg-[#141c33]"
-          >
-            <div class="w-[25%]  ">
-              <img
-                src="/images/WC_no_background.png"
-                alt="scadvert logo"
-                class="object-scale-down h-[90%] w-[90%]  "
-              />
-            </div>
-            <div class="poppins-regular  text-white">
-              World Cup 2022
-            </div>
-          </div>
-          <div
-            style=" padding:2px; border-color:rgba(123,131,156,.6); "
-            class="flex mx-[20px] border-b-[1px] border-t-[1px]  bg-[#141c33]"
-          >
-            <div class="w-[25%]">
-              <img
-                src="/images/champe_no_bc.png"
-                alt="scadvert logo"
-                class="object-scale-down h-[90%] w-[90%]  "
-              />
-            </div>
-            <div class="poppins-regular  text-white">
-              Champions League
-            </div>
-          </div>
-        </div>
 
-        <div
-          style=" padding:2px; border-color:rgba(123,131,156,.6);  "
-          class="flex mx-[20px] border-b-[1px] border-t-[1px]  mb-[20px] bg-[#141c33]"
-        >
-          <div class="w-[25%]">
-            <img
-              src="/images/c.png"
-              alt="scadvert logo"
-              class="object-scale-down h-[90%] w-[90%]  "
-            />
-          </div>
-          <div class="poppins-regular  text-white">
-            Favourites
-          </div>
-        </div>
-        <div class="mb-2">
-          <div class="mx-[20px] flex items-center  justify-around bg-[#202a39] h-[50px] ">
-            <span class="poppins-regular text-white">
-              live
-            </span>
-            <span class="poppins-regular text-white">
-              prematch
-            </span>
-          </div>
           <div
-            style=" border-color:rgba(123,131,156,.6); "
-            class="flex mx-[20px] border-b-[1px] border-t-[1px]   bg-[#141c33]"
-          >
-            <div class="w-[25%]  ">
-              <img
-                src="/images/WC_no_background.png"
-                alt="scadvert logo"
-                class="object-scale-down h-[90%] w-[90%]  "
-              />
-            </div>
-            <div class="poppins-regular  text-white">
-              World Cup 2022
-            </div>
-          </div>
-          <div
-            style=" padding:2px; border-color:rgba(123,131,156,.6); "
-            class="flex mx-[20px] border-b-[1px] border-t-[1px]  bg-[#141c33]"
+            style=" padding:2px; border-color:rgba(123,131,156,.6);  "
+            class="flex mx-[20px] border-b-[1px] border-t-[1px]  mb-[20px] bg-[#141c33]"
           >
             <div class="w-[25%]">
               <img
-                src="/images/champe_no_bc.png"
+                src="/images/c.png"
                 alt="scadvert logo"
                 class="object-scale-down h-[90%] w-[90%]  "
               />
             </div>
             <div class="poppins-regular  text-white">
-              Champions League
+              Favourites
+            </div>
+          </div>
+          <div class="mb-2">
+            <div class="mx-[20px] flex items-center  justify-around bg-[#202a39] h-[50px] ">
+              <span class="poppins-regular text-white">
+                live
+              </span>
+              <span class="poppins-regular text-white">
+                prematch
+              </span>
+            </div>
+            <div
+              style=" border-color:rgba(123,131,156,.6); "
+              class="flex mx-[20px] border-b-[1px] border-t-[1px]   bg-[#141c33]"
+            >
+              <div class="w-[25%]  ">
+                <img
+                  src="/images/WC_no_background.png"
+                  alt="scadvert logo"
+                  class="object-scale-down h-[90%] w-[90%]  "
+                />
+              </div>
+              <div class="poppins-regular  text-white">
+                World Cup 2022
+              </div>
+            </div>
+            <div
+              style=" padding:2px; border-color:rgba(123,131,156,.6); "
+              class="flex mx-[20px] border-b-[1px] border-t-[1px]  bg-[#141c33]"
+            >
+              <div class="w-[25%]">
+                <img
+                  src="/images/champe_no_bc.png"
+                  alt="scadvert logo"
+                  class="object-scale-down h-[90%] w-[90%]  "
+                />
+              </div>
+              <div class="poppins-regular  text-white">
+                Champions League
+              </div>
             </div>
           </div>
         </div>
@@ -233,11 +249,11 @@
     </div>
   </div>
   <%= if @user.role == "admin" || @user.role == "superadmin" do %>
-    <div style="padding-left:200px;">
+    <div class="md:pl-[200px]">
       <%= @inner_content %>
     </div>
   <% else %>
-    <div style="padding-left:305px;">
+    <div class="md:pl-[305px]">
       <%= @inner_content %>
     </div>
   <% end %>
