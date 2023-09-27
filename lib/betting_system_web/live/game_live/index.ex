@@ -21,6 +21,13 @@ defmodule BettingSystemWeb.GameLive.Index do
     ip_addr = :inet_parse.ntoa(peer_data.address) |> to_string()
     IO.inspect(ip_addr)
 
+    if_display =
+      if Enum.count(selected_bets) == 0 do
+        "z-index:8; display:none"
+      else
+        "z-index:8; "
+      end
+
     {:ok,
      socket
      |> assign(:games, list_games())
@@ -31,7 +38,8 @@ defmodule BettingSystemWeb.GameLive.Index do
      |> assign(:changeset, changeset)
      |> assign(:payout, 0.0)
      |> assign(:disabled, true)
-     |> assign(:length_bet, Enum.count(selected_bets))}
+     |> assign(:length_bet, Enum.count(selected_bets))
+     |> assign(:div_display, if_display)}
   end
 
   @impl true
@@ -91,11 +99,20 @@ defmodule BettingSystemWeb.GameLive.Index do
           selected_bets = Betslips.get_betslips(socket.assigns.user.id)
           total_odds = Enum.map(selected_bets, & &1.odds) |> Enum.sum()
 
+          if_display =
+            if Enum.count(selected_bets) == 0 do
+              "z-index:8; display:none"
+            else
+              "z-index:8; "
+            end
+
           {:noreply,
            socket
            |> put_flash(:info, "Betslip created successfully")
            |> assign(:bets, selected_bets)
-           |> assign(:total_odds, total_odds)}
+           |> assign(:total_odds, total_odds)
+           |> assign(:length_bet, Enum.count(selected_bets))
+           |> assign(:div_display, if_display)}
 
         {:error, %Ecto.Changeset{} = changeset} ->
           {:noreply, assign(socket, changeset: changeset)}
@@ -120,13 +137,22 @@ defmodule BettingSystemWeb.GameLive.Index do
           selected_bets = Betslips.get_betslips(socket.assigns.user.id)
           total_odds = Enum.map(selected_bets, & &1.odds) |> Enum.sum()
 
+          if_display =
+            if Enum.count(selected_bets) == 0 do
+              "z-index:8; display:none"
+            else
+              "z-index:8; "
+            end
+
           IO.inspect(selected_bets)
 
           {:noreply,
            socket
            |> put_flash(:info, "Betslip updated successfully")
            |> assign(:bets, selected_bets)
-           |> assign(:total_odds, total_odds)}
+           |> assign(:total_odds, total_odds)
+           |> assign(:length_bet, Enum.count(selected_bets))
+           |> assign(:div_display, if_display)}
 
         {:error, %Ecto.Changeset{} = changeset} ->
           {:noreply, assign(socket, :changeset, changeset)}
@@ -187,6 +213,14 @@ defmodule BettingSystemWeb.GameLive.Index do
         end
 
         selected_bets = Betslips.get_betslips(socket.assigns.user.id)
+
+        if_display =
+          if Enum.count(selected_bets) == 0 do
+            "z-index:8; display:none"
+          else
+            "z-index:8; "
+          end
+
         total_odds = Enum.map(selected_bets, & &1.odds) |> Enum.sum()
         IO.inspect(selected_bets)
 
@@ -195,7 +229,9 @@ defmodule BettingSystemWeb.GameLive.Index do
          |> put_flash(:info, "Bets created successfully")
          |> assign(:bets, selected_bets)
          |> assign(:total_odds, total_odds)
-         |> assign(:payout, 0.0)}
+         |> assign(:payout, 0.0)
+         |> assign(:length_bet, Enum.count(selected_bets))
+         |> assign(:div_display, if_display)}
 
       {:error, %Ecto.Changeset{} = changeset} ->
         {:noreply, assign(socket, changeset: changeset)}

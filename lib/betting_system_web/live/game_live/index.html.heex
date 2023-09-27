@@ -12,9 +12,9 @@
     />
   </.modal>
 <% end %>
-<div class="absolute top-[120px] right-[20px]">
+<div id="viewBetslips" class=" absolute top-[120px] right-[20px]">
   <div
-    style="z-index:8;"
+    style={"#{@div_display}"}
     class="md:hidden relative pt-[7px]  flex justify-evenly  w-[120px] h-[40px] bg-[#0097E1]"
   >
     <div>
@@ -35,7 +35,10 @@ xt-base text-white align-top uppercase">betslip</span>
 
 <div class="main-div h-[100vh] flex relative flex-row gap-2 pt-4 
 ">
-  <div class="w-auto md:w-[70%] bg-[#141C33] rounded p-2   h-[80%] overflow-y-auto ">
+  <div
+    id="gameDiv"
+    class="  w-auto md:w-[70%] bg-[#141C33] rounded p-2   h-[80%] overflow-y-auto "
+  >
     <div
       style="border-color:rgba(123,131,156,.6);"
       class="flex justify-evenly poppins-regular pb-2 border-b-[1px] text-[#8A92AB]"
@@ -146,7 +149,10 @@ xt-base text-white align-top uppercase">betslip</span>
       </div>
     <% end %>
   </div>
-  <div class=" hidden md:block betslip-div  bg-blue-[#141C33] w-[30%] h-[100vh] text-white">
+  <div
+    id="betdetailsDiv"
+    class=" hidden md:block betslip-div  bg-blue-[#141C33] w-[30%] h-[100vh] text-white"
+  >
     <div class="h-[45%] overflow-y-auto">
       <div class="w-[full] bg-[#202A39] p-2">
         <p class="poppins-regular text-white">Betslip</p>

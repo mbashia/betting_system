@@ -92,5 +92,13 @@
         sidebar.classList.add('hidden');
       }
     </script>
+    <script>
+      var betdetailsDiv = document.getElementById('betdetailsDiv')
+      var gamediv = document.getElementById('gameDiv')
+       document.getElementById("viewBetslips").addEventListener("click", () => {
+        betdetailsDiv.classList.toggle("hidden");
+        gamediv.classList.add('hidden')
+      });
+    </script>
   </body>
 </html>
