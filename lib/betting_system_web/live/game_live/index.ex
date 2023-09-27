@@ -26,11 +26,12 @@ defmodule BettingSystemWeb.GameLive.Index do
      |> assign(:games, list_games())
      |> assign(:user, user)
      |> assign(:sports, sports)
-     |> assign(:bets, [])
+     |> assign(:bets, selected_bets)
      |> assign(:total_odds, 0.0)
      |> assign(:changeset, changeset)
      |> assign(:payout, 0.0)
-     |> assign(:disabled, true)}
+     |> assign(:disabled, true)
+     |> assign(:length_bet, Enum.count(selected_bets))}
   end
 
   @impl true
