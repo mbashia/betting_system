@@ -104,5 +104,20 @@
         gamediv.classList.add('hidden')
       });
     </script>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+          const betInput = document.getElementById('betInput');
+          const oddsDisplay = document.getElementById('oddsDisplay');
+          const payoutDisplay = document.getElementById('payoutDisplay');
+
+          betInput.addEventListener('input', function() {
+              const betAmount = parseFloat(this.value);
+              const odds = parseFloat(oddsDisplay.textContent);
+              const payout = betAmount * odds;
+              payoutDisplay.textContent = payout.toFixed(2); // Limit decimal places to 2
+          });
+      });
+    </script>
   </body>
 </html>

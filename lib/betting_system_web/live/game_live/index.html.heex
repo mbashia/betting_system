@@ -208,25 +208,20 @@ xt-base text-white align-top uppercase">betslip</span>
         </div>
         <div class="flex justify-between p-2">
           <p>total odds</p>
-          <p><%= @total_odds %></p>
+          <p id="oddsDisplay"><%= @total_odds %></p>
         </div>
 
         <div class="flex justify-between p-2">
           <p>payout</p>
-          <p><%= @payout %></p>
+          <p id="payoutDisplay"><%= @payout %></p>
         </div>
-        <.form
-          let={f}
-          for={@changeset}
-          id="bets-form"
-          phx-submit="place_bet"
-          phx-change="validate_amount"
-        >
+        <.form let={f} for={@changeset} id="bets-form" phx-submit="place_bet">
           <%= label(f, :amount) %>
           <%= number_input(f, :amount,
             step: "any",
             placeholder: "Amount(KES)",
-            class: "w-[full] text-black"
+            class: "w-[full] text-black",
+            id: "betInput"
           ) %>
           <%= error_tag(f, :amount) %>
 
@@ -236,8 +231,7 @@ xt-base text-white align-top uppercase">betslip</span>
           <div class="ml-[120px] md:ml-6 bg-[#FA6838] w-[100px] rounded  p-2 mt-4">
             <%= submit("place bet",
               phx_disable_with: "Saving...",
-              class: "text-white poppins-regular",
-              disabled: @disabled
+              class: "text-white poppins-regular"
             ) %>
           </div>
         </.form>
