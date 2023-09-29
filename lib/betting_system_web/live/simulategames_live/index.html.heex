@@ -7,20 +7,29 @@
 <div class="flex flex-col   w-[98%] gap-2">
   <div class="flex flex-col gap-1">
     <div class="flex flex-row items-end p-2 justify-between w-[100%]">
+      <div class=" md:hidden " id="sidebar" onclick="toggleSidebar()">
+        <%= Heroicons.icon("bars-3",
+          type: "solid",
+          class: "h-8  text-[#8A92AB] font-bold w-8"
+        ) %>
+      </div>
+
       <div>
-        <span class="poppins-bold text-3xl text-white  uppercase ">Listing all  games</span>
+        <span class="poppins-bold text-lg md:text-3xl text-white  uppercase ">
+          Listing all  games
+        </span>
       </div>
 
       <button
         phx-click="simulate"
-        class="bg-green-500 flex gap-2 items-center text-white  rounded-md p-2"
+        class="bg-green-500 flex gap-2 items-center text-sm md:text-base text-white  rounded-md  p-1 md:p-2"
       >
         Simulate Games
       </button>
     </div>
   </div>
-  <div class="bg-[#202941] text-white   rounded-xl p-4 ">
-    <table class="w-[100%]">
+  <div class="bg-[#202941] text-white  overflow-x-auto  rounded-xl p-4 ">
+    <table class=" w-[100%]">
       <thead class="border-b-2 poppins-regular border-black">
         <tr>
           <th class="p-2 font-semibold ">image</th>
@@ -41,7 +50,7 @@
           <th class="p-2 font-semibold ">2</th>
         </tr>
       </thead>
-      <tbody id="events" class="poppins-light">
+      <tbody id="events" class="poppins-light text-sm md:text-base">
         <%= for game <- @games do %>
           <tr
             class="border-b-[1px] cursor-pointer text-center hover:bg-blue-100/50 transition-all ease-in-out duration-500  border-black"
@@ -49,14 +58,19 @@
           >
             <td class="p-2">
               <div class="flex fex-col justify-center items-center">
-                <img src="/images/champe_no_bc.png" class="w-[50px] h-[50px] object-cover " />
+                <img
+                  src="/images/champe_no_bc.png"
+                  class=" w-[25px] md:w-[50px]  h-[25px] md:h-[50px] object-cover "
+                />
               </div>
             </td>
-            <td><%= game.sport.name %></td>
+            <td class="p-2"><%= game.sport.name %></td>
 
-            <td><%= game.team1 %> vs <%= game.team2 %></td>
-            <td><%= NaiveDateTime.to_iso8601(game.date) |> String.replace("T", " ") %></td>
-            <td>
+            <td class="p-2"><%= game.team1 %> vs <%= game.team2 %></td>
+            <td class="p-2">
+              <%= NaiveDateTime.to_iso8601(game.date) |> String.replace("T", " ") %>
+            </td>
+            <td class="p-2">
               <%= if game.status == "completed" do %>
                 <span class="bg-green-500 text-white rounded-md p-1">
                   <%= game.status %>
@@ -67,20 +81,20 @@
                 </span>
               <% end %>
             </td>
-            <td><%= game.result %></td>
-            <td><%= game.location %></td>
+            <td class="p-2"><%= game.result %></td>
+            <td class="p-2"><%= game.location %></td>
 
-            <td>
+            <td class="p-2">
               <button>
                 <%= game.win %>
               </button>
             </td>
-            <td>
+            <td class="p-2">
               <button>
                 <%= game.draw %>
               </button>
             </td>
-            <td>
+            <td class="p-2">
               <button>
                 <%= game.lose %>
               </button>

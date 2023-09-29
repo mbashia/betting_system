@@ -15,20 +15,29 @@
   <div class="flex flex-col   w-[98%] gap-2">
     <div class="flex flex-col gap-1">
       <div class="flex flex-row items-end p-2 justify-between w-[100%]">
+        <div class=" md:hidden " id="sidebar">
+          <%= Heroicons.icon("bars-3",
+            type: "solid",
+            class: "h-8  text-[#8A92AB] font-bold w-8"
+          ) %>
+        </div>
+
         <div>
-          <span class="poppins-bold text-3xl text-white  uppercase ">Listing all users</span>
+          <span class="poppins-bold text-lg md:text-3xl text-white  uppercase ">
+            Listing all users
+          </span>
         </div>
         <%= live_patch(to: Routes.sport_index_path(@socket, :new)) do %>
           <button class="bg-green-500 flex gap-2 items-center text-white  rounded-md p-2">
             <%= Heroicons.icon("plus",
               type: "solid",
-              class: "h-8   font-bold w-8"
+              class: "h-6 md:h-8   font-bold w-6 md: w-8"
             ) %> New Sport
           </button>
         <% end %>
       </div>
     </div>
-    <div class="bg-[#202941] text-white   rounded-xl p-4 ">
+    <div class="bg-[#202941] text-white overflow-x-auto  rounded-xl p-4 ">
       <table class="w-[100%]">
         <thead class="border-b-2 poppins-regular border-black">
           <tr>
@@ -56,13 +65,13 @@
                   <img src="/images/champe_no_bc.png" class="w-[50px] h-[50px] object-cover " />
                 </div>
               </td>
-              <td><%= client.firstname %></td>
+              <td class="p-2"><%= client.firstname %></td>
 
-              <td><%= client.lastname %></td>
-              <td><%= client.phone_number %></td>
-              <td><%= client.role %></td>
+              <td class="p-2"><%= client.lastname %></td>
+              <td class="p-2"><%= client.phone_number %></td>
+              <td class="p-2"><%= client.role %></td>
 
-              <td>
+              <td class="p-2">
                 <%= if client.status == "active" do %>
                   <span class="bg-green-500 text-white rounded-md p-1">
                     <%= client.status %>
@@ -74,7 +83,7 @@
                 <% end %>
               </td>
 
-              <td>
+              <td class="p-2">
                 <div class="flex flex-row gap-2 justify-center items-center">
                   <div>
                     <%= live_redirect(to: Routes.user_show_path(@socket, :show, client)) do %>
@@ -178,14 +187,16 @@
             </span>
           </div>
         </div>
-        <button phx-click="bet history" class="cursor:pointer">view bet history</button>
+        <button phx-click="bet history" class="cursor:pointer border border-red-500">
+          view bet history
+        </button>
       </div>
 
       <div></div>
     </div>
     <%= if @check_bet_history == 1 do %>
-      <div class=" bg-[#1C2439] flex flex-col    absolute right-[250px]  rounded-2xl top-[130px] h-[73%] w-[45%] p-4 pt-6 overflow-y-auto">
-        <div class="flex justify-between ">
+      <div class=" bg-[#1C2439] flex flex-col    absolute right-[100px] top-[150px]  md:right-[250px]  rounded-2xl md:top-[130px] h-[73%] w-[65%] md:h-[73%] md:w-[45%] p-4 pt-6 overflow-y-auto">
+        <div phx-click="close_pop_up" class="flex justify-between ">
           <div></div>
 
           <div>
@@ -195,7 +206,7 @@
           </div>
 
           <div>
-            <button phx-click="close_pop_up">
+            <button>
               <span class="text-[#92a0ca] poppins-bold uppercase text-lg ">X</span>
             </button>
           </div>

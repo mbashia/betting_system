@@ -15,7 +15,7 @@ defmodule BettingSystemWeb.GameLive.Index do
     sports = Sports.list_sports(user.id)
     selected_bets = Betslips.get_betslips(user.id)
     changeset = Bet.change_bets(%Bets{})
-    IO.inspect(socket, structs: false)
+    # IO.inspect(socket, structs: false)
 
     peer_data = get_connect_info(socket, :peer_data)
     ip_addr = :inet_parse.ntoa(peer_data.address) |> to_string()

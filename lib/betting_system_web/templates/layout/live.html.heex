@@ -15,7 +15,7 @@
     <div class="">
       <p class=" text-sm md:text-xl font-semibold poppins-bold">SportOdds</p>
     </div>
-    <div class="text-sm md:text-base poppins-light">
+    <div class="invisible md:visible text-sm md:text-base poppins-light">
       <a class="m-2 border-b border-transparent  hover:border-white" href="#">live</a>
       <a class="m-2 border-b border-transparent  hover:border-white" href="#">betting</a>
 
@@ -32,7 +32,10 @@
     <div>
       <div class="drop-button hover:cursor-pointer flex gap-2" onclick="toggle()">
         <div>
-          <%= Heroicons.icon("user-circle", type: "outline", class: "h-6 w-6") %>
+          <%= Heroicons.icon("user-circle",
+            type: "outline",
+            class: "h-6 w-6 border-[1px] border-green-500 rounded-full m-[-2px]"
+          ) %>
         </div>
         <div class="flex items-center justify-center">
           <%= Heroicons.icon("chevron-down", type: "outline", class: "h-6 w-6 ") %>
@@ -101,11 +104,11 @@
     </div>
   </div>
   <div
-    class="absolute pt-[180px] top-[30px] left-[0px] bottom-[0px] width-[300px] h-[100%]"
+    class="absolute pt-[180px] top-[30px] left-[0px] bottom-[0px] w-[300px] h-[100%]"
     style=" 
     z-index:4;"
   >
-    <div class="flex-col w-[100%] h-[100%]">
+    <div class="flex flex-col w-[100%] h-[100%]">
       <%= if @user.role == "admin" || @user.role == "superadmin" do %>
         <div
           id="menu"

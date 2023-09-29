@@ -67,6 +67,7 @@
     <%= @inner_content %>
     <script>
           function toggle(){
+            console.log("dropdown");
             element = document.getElementById("myDropdown").classList.toggle("invisible");
           }
           document.addEventListener("click", function(event) {
@@ -80,18 +81,21 @@
           }
       });
     </script>
+
     <script>
       function toggleSidebar() {
-        var sidebar = document.getElementById('menu');
+        console.log("im here, arent I?");
+        var sidebar = document.querySelector('#menu');
         sidebar.classList.toggle('hidden');
 
       }
 
       function closeside() {
-        var sidebar = document.getElementById('menu');
+        var sidebar = document.querySelector('#menu');
         sidebar.classList.add('hidden');
       }
     </script>
+
     <script>
       var betdetailsDiv = document.getElementById('betdetailsDiv')
       var gamediv = document.getElementById('gameDiv')

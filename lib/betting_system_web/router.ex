@@ -74,7 +74,7 @@ defmodule BettingSystemWeb.Router do
   end
 
   scope "/", BettingSystemWeb do
-    pipe_through [:browser, :require_authenticated_user]
+    pipe_through [:browser, :require_authenticated_admin]
 
     live "/sports", SportLive.Index, :index
     live "/simulate", SimulategamesLive.Index, :index
@@ -82,14 +82,14 @@ defmodule BettingSystemWeb.Router do
     live "/sports/new", SportLive.Index, :new
     live "/sports/:id/edit", SportLive.Index, :edit
 
-    live "/users", UserLive.Index, :index
+    # live "/users", UserLive.Index, :index
     live "/users/new", UserLive.Index, :new
     live "/users/:id/edit", UserLive.Index, :edit
     live "/us/:id", UserLive.Show, :show
 
     live "/sports/:id", SportLive.Show, :show
     live "/sports/:id/show/edit", SportLive.Show, :edit
-    live "/games", GameLive.Index, :index
+    # live "/games", GameLive.Index, :index
     live "/games/new", GameLive.Index, :new
     live "/games/:id/edit", GameLive.Index, :edit
 
@@ -112,6 +112,13 @@ defmodule BettingSystemWeb.Router do
     get "/users/settings", UserSettingsController, :edit
     put "/users/settings", UserSettingsController, :update
     get "/users/settings/confirm_email/:token", UserSettingsController, :confirm_email
+  end
+
+  scope "/", BettingSystemWeb do
+    pipe_through [:browser, :require_authenticated_user]
+
+    live "/users", UserLive.Index, :index
+    live "/games", GameLive.Index, :index
   end
 
   scope "/", BettingSystemWeb do

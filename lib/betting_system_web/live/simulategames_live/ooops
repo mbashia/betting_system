@@ -58,3 +58,16 @@
       </.form>
     <% end %>
   </div>
+  <script>
+      function toggleSidebar() {
+        console.log("im here, arent I?");
+        var sidebar = document.querySelector('#menu');
+        sidebar.classList.toggle('hidden');
+
+      }
+
+      function closeside() {
+        var sidebar = document.querySelector('#menu');
+        sidebar.classList.add('hidden');
+      }
+    </script>
