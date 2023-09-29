@@ -163,11 +163,14 @@ defmodule BettingSystemWeb.GameLive.Index do
   def handle_event("cancel", %{"cancel" => id}, socket) do
     betslip_id = String.to_integer(id)
     betslip = Betslips.get_betslip!(betslip_id)
+
     {:ok, _} = Betslips.delete_betslip(betslip)
+    selected_bets = Betslips.get_betslips(socket.assigns.user.id)
 
     {:noreply,
      socket
-     |> assign(:bets, Betslips.get_betslips(socket.assigns.user.id))}
+     |> assign(:bets, Betslips.get_betslips(socket.assigns.user.id))
+     |> assign(:length_bet, Enum.count(selected_bets))}
   end
 
   def handle_event("place_bet", %{"bets" => %{"amount" => amount, "odds" => odds}}, socket) do

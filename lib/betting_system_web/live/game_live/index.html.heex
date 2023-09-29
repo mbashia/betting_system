@@ -96,7 +96,7 @@ xt-base text-white align-top uppercase">betslip</span>
 
         <div class="w-[50%] flex justify-between">
           <button
-            class="bg-[#283352] w-[55px] rounded h-[40px]"
+            class="bg-[#283352]   w-[55px] rounded h-[40px]"
             phx-click="add bet"
             phx-value-id={game.id}
             phx-value-type="team1 win"
@@ -105,7 +105,7 @@ xt-base text-white align-top uppercase">betslip</span>
             <%= game.win %>
           </button>
           <button
-            class="bg-[#283352] w-[55px] rounded h-[40px]"
+            class="bg-[#283352]  w-[55px] rounded h-[40px]"
             phx-click="add bet"
             phx-value-id={game.id}
             phx-value-type="game_draw"
@@ -151,7 +151,7 @@ xt-base text-white align-top uppercase">betslip</span>
   </div>
   <div
     id="betdetailsDiv"
-    class=" hidden md:block betslip-div  bg-blue-[#141C33]  w-auto md:w-[30%] h-[100vh] text-white"
+    class=" hidden md:block betslip-div  bg-blue-[#141C33] m-4 md:m-0 w-[100%] md:w-[30%] h-[100vh] text-white"
   >
     <div class="h-[45%] overflow-y-auto">
       <div class="w-[full] bg-[#202A39] p-2">
@@ -233,7 +233,7 @@ xt-base text-white align-top uppercase">betslip</span>
           <%= number_input(f, :odds, step: "any", type: "hidden", value: @total_odds) %>
           <%= error_tag(f, :odds) %>
 
-          <div class="ml-6 bg-[#FA6838] w-[100px] rounded  p-2 mt-4">
+          <div class="ml-[120px] md:ml-6 bg-[#FA6838] w-[100px] rounded  p-2 mt-4">
             <%= submit("place bet",
               phx_disable_with: "Saving...",
               class: "text-white poppins-regular",

@@ -104,11 +104,11 @@
     </div>
   </div>
   <div
-    class="absolute pt-[180px] top-[30px] left-[0px] bottom-[0px] w-[300px] h-[100%]"
+    class="absolute pt-[180px] top-[30px] left-[0px] bottom-[0px] md:w-[300px] h-[100%]"
     style=" 
     z-index:4;"
   >
-    <div class="flex flex-col w-[100%] h-[100%]">
+    <div class="flex flex-col  border border-red-500">
       <%= if @user.role == "admin" || @user.role == "superadmin" do %>
         <div
           id="menu"
