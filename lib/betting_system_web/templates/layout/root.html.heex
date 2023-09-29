@@ -97,12 +97,24 @@
     </script>
 
     <script>
-      var betdetailsDiv = document.getElementById('betdetailsDiv')
-      var gamediv = document.getElementById('gameDiv')
-       document.getElementById("viewBetslips").addEventListener("click", () => {
-        betdetailsDiv.classList.toggle("hidden");
-        gamediv.classList.add('hidden')
+           var betdetailsDiv = document.getElementById('betdetailsDiv');
+      var gamediv = document.getElementById('gameDiv');
+      var viewBetslipsButton = document.getElementById("viewBetslips");
+
+      let isBetDetailsVisible = false;
+
+      viewBetslipsButton.addEventListener("click", () => {
+        if (isBetDetailsVisible) {
+          betdetailsDiv.classList.add("hidden");
+          gamediv.classList.remove('hidden');
+        } else {
+          betdetailsDiv.classList.remove("hidden");
+          gamediv.classList.add('hidden');
+        }
+        
+        isBetDetailsVisible = !isBetDetailsVisible;
       });
+        
     </script>
 
     <script>
